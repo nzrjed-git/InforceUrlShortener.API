@@ -1,0 +1,16 @@
+@InforceUrlShortener.API_HostAddress = https://localhost:7277
+
+###
+
+POST {{InforceUrlShortener.API_HostAddress}}/api/shortenedUrl
+Content-Type: application/json
+
+{
+  //CreateShortenedUrlCommand
+}
+
+###
+@id = b2aa5e19-e98e-48ff-d783-08dda85c63d2
+GET {{InforceUrlShortener.API_HostAddress}}/api/shortenedUrl/{{id}}
+
+###
