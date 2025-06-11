@@ -1,8 +1,12 @@
-﻿using InforceUrlShortener.Domain.RepositoriesInterfaces;
+﻿using InforceUrlShortener.Domain.Entities;
+using InforceUrlShortener.Domain.RepositoriesInterfaces;
 using InforceUrlShortener.Domain.ServicesInterfaces;
+using InforceUrlShortener.Infrastructure.Authorization.Services;
 using InforceUrlShortener.Infrastructure.Persistence;
 using InforceUrlShortener.Infrastructure.Repositories;
+using InforceUrlShortener.Infrastructure.Seeders;
 using InforceUrlShortener.Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,11 +23,20 @@ namespace InforceUrlShortener.Infrastructure.Extensions
             {
                 throw new InvalidOperationException("No database connection string configured");
             }
+            
+
             services.AddDbContext<InforceUrlShortenerDbContext>(opt =>
-                opt.UseSqlServer(dbConnectionString));
+                opt.UseSqlServer(dbConnectionString)
+                .EnableSensitiveDataLogging());
+
+            services.AddIdentityApiEndpoints<User>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<InforceUrlShortenerDbContext>();
 
             services.AddScoped<IShortenedUrlRepository, ShortenedUrlRepository>();
             services.AddScoped<IUrlShortenerService, UrlShortenerService>();
+            services.AddScoped<IUrlShortenerSeeder, UrlShortenerSeeder>();
+            services.AddScoped<IShortenedUrlsAuthorizationService, ShortenedUrlsAuthorizationService>();
         }
     }
 }

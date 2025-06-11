@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using InforceUrlShortener.Application.ShortenedUrls.DTOs;
+using InforceUrlShortener.Application.User;
 using InforceUrlShortener.Domain.Entities;
 using InforceUrlShortener.Domain.Exceptions;
 using InforceUrlShortener.Domain.RepositoriesInterfaces;
@@ -18,6 +19,8 @@ namespace InforceUrlShortener.Application.ShortenedUrls.Queries.GetShortenedUrlB
                 ?? throw new NotFoundException(nameof(ShortenedUrl), request.Id.ToString());
 
             var shortenedUrlFullDto = mapper.Map<ShortenedUrlFullDto>(shortenedUrl);
+            
+            shortenedUrlFullDto.OwnerEmail = shortenedUrl.Owner.Email!;
 
             return shortenedUrlFullDto;
         }

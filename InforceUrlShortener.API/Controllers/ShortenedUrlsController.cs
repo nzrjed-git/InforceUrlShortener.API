@@ -3,12 +3,14 @@ using InforceUrlShortener.Application.ShortenedUrls.Commands.DeleteShortenedUrl;
 using InforceUrlShortener.Application.ShortenedUrls.Queries.GetPaginatedShortenedUrls;
 using InforceUrlShortener.Application.ShortenedUrls.Queries.GetShortenedUrlById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InforceUrlShortener.API.Controllers
 {
     [ApiController]
     [Route("api/shortenedUrl")]
+    [Authorize]
     public class ShortenedUrlsController(
         IMediator mediator) : ControllerBase
     {
@@ -27,6 +29,7 @@ namespace InforceUrlShortener.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetPaginatedShortenedUrls([FromQuery] GetPaginatedShortenedUrlsQuery query)
         {
             var shortenedUrls = await mediator.Send(query);

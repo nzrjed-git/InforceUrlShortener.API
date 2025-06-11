@@ -41,7 +41,10 @@ namespace InforceUrlShortener.Infrastructure.Repositories
 
         public async Task<ShortenedUrl?> GetShortenedUrlById(Guid id)
         {
-            return await dbContext.ShortenedUrls.FirstOrDefaultAsync(s => s.Id == id);
+            return await dbContext.ShortenedUrls
+                .AsNoTracking()
+                .Include(s=>s.Owner)
+                .FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<bool> HasOriginalUrlDuplicateAsync(string originalUrl)

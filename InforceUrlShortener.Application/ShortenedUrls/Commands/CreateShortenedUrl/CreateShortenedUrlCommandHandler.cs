@@ -1,4 +1,5 @@
-﻿using InforceUrlShortener.Domain.Entities;
+﻿using InforceUrlShortener.Application.User;
+using InforceUrlShortener.Domain.Entities;
 using InforceUrlShortener.Domain.Exceptions;
 using InforceUrlShortener.Domain.RepositoriesInterfaces;
 using InforceUrlShortener.Domain.ServicesInterfaces;
@@ -8,11 +9,14 @@ namespace InforceUrlShortener.Application.ShortenedUrls.Commands.CreateShortened
 {
     public class CreateShortenedUrlCommandHandler(
         IShortenedUrlRepository shortenedUrlRepository,
-        IUrlShortenerService urlShortenerService) 
+        IUrlShortenerService urlShortenerService,
+        IUserContext userContext) 
         : IRequestHandler<CreateShortenedUrlCommand, Guid>
     {
         public async Task<Guid> Handle(CreateShortenedUrlCommand request, CancellationToken cancellationToken)
         {
+            var currentUser = userContext.GetCurrentUser()!;
+
             var shortCode = await urlShortenerService.GenerateShortCodeAsync();
             var hasOriginalUrlDuplicate = await shortenedUrlRepository.HasOriginalUrlDuplicateAsync(request.OriginalUrl);
             if (hasOriginalUrlDuplicate)
@@ -23,6 +27,7 @@ namespace InforceUrlShortener.Application.ShortenedUrls.Commands.CreateShortened
                 OriginalUrl = request.OriginalUrl,
                 ShortCode = shortCode,
                 CreatedAt = DateTime.UtcNow,
+                OwnerId = currentUser.Id
             };
 
             var id = await shortenedUrlRepository.CreateAsync(shortenedUrl);
