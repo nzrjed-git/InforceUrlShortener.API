@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using InforceUrlShortener.Application.User;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace InforceUrlShortener.Application.Extensions
@@ -15,6 +16,9 @@ namespace InforceUrlShortener.Application.Extensions
 
             services.AddValidatorsFromAssembly(assembly)
                 .AddFluentValidationAutoValidation();
+
+            services.AddScoped<IUserContext, UserContext>();
+            services.AddHttpContextAccessor();
         }
     }
 }

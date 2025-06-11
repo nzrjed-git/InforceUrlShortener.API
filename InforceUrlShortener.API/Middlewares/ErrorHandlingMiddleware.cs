@@ -11,11 +11,11 @@ namespace InforceUrlShortener.API.Middlewares
             {
                 await next.Invoke(context);
             }
-            //catch (ForbidException)
-            //{
-            //    context.Response.StatusCode = 403;
-            //    await context.Response.WriteAsync("Access forbidden");
-            //}
+            catch (ForbidException)
+            {
+                context.Response.StatusCode = 403;
+                await context.Response.WriteAsync("Access forbidden");
+            }
             catch (NotFoundException ex)
             {
                 context.Response.StatusCode = 404;

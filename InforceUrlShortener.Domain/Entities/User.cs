@@ -1,6 +1,8 @@
-﻿namespace InforceUrlShortener.Domain.Entities
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace InforceUrlShortener.Domain.Entities
 {
-    public class User
+    public class User : IdentityUser
     {
         public List<ShortenedUrl> ShortenedUrls { get; set; } = new();
     }
