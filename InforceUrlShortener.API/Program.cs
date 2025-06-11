@@ -1,6 +1,9 @@
 using InforceUrlShortener.API.Middlewares;
 using InforceUrlShortener.Application.Extensions;
 using InforceUrlShortener.Infrastructure.Extensions;
+using Microsoft.Extensions.Configuration;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,10 +14,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddScoped<ErrorHandlingMiddleware>();
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration
+        .ReadFrom.Configuration(context.Configuration);
+});
 
 var app = builder.Build();
 
@@ -25,7 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseMiddleware<ErrorHandlingMiddleware>();
+app.UseSerilogRequestLogging();
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

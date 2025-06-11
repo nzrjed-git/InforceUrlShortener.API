@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace InforceUrlShortener.Application.Extensions
 {
@@ -10,6 +12,9 @@ namespace InforceUrlShortener.Application.Extensions
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
             services.AddAutoMapper(assembly);
+
+            services.AddValidatorsFromAssembly(assembly)
+                .AddFluentValidationAutoValidation();
         }
     }
 }
