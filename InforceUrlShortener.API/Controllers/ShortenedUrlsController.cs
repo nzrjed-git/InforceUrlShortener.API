@@ -17,8 +17,8 @@ namespace InforceUrlShortener.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateShortenedUrl(CreateShortenedUrlCommand command)
         {
-            var id = await mediator.Send(command);
-            return Ok(id);
+            var shortenedUrlListItemDto = await mediator.Send(command);
+            return Ok(shortenedUrlListItemDto);
         }
 
         [HttpGet("{id}")]

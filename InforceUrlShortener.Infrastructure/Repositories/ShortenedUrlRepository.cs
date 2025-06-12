@@ -8,11 +8,10 @@ namespace InforceUrlShortener.Infrastructure.Repositories
     public class ShortenedUrlRepository(InforceUrlShortenerDbContext dbContext) : IShortenedUrlRepository
     {
         
-        public async Task<Guid> CreateAsync(ShortenedUrl shortenedUrl)
+        public async Task CreateAsync(ShortenedUrl shortenedUrl)
         {
             await dbContext.AddAsync(shortenedUrl);
             await dbContext.SaveChangesAsync();
-            return shortenedUrl.Id;
         }
 
         public async Task DeleteAsync(ShortenedUrl shortenedUrl)

@@ -2,8 +2,6 @@
 {
     public enum ResourceOperation
     {
-        //Create,
-        //ReadFull,
         Delete
     }
 }

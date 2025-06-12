@@ -8,5 +8,6 @@
         public DateTime CreatedAt { get; set; }
 
         public string OwnerEmail { get; set; } = default!;
+        public string OwnerId { get; set; } = default!;
     }
 }

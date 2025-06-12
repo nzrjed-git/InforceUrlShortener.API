@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using InforceUrlShortener.Application.Helpers;
 using InforceUrlShortener.Application.ShortenedUrls.DTOs;
-using InforceUrlShortener.Application.User;
 using InforceUrlShortener.Domain.Entities;
 using InforceUrlShortener.Domain.Exceptions;
 using InforceUrlShortener.Domain.RepositoriesInterfaces;
@@ -21,6 +21,7 @@ namespace InforceUrlShortener.Application.ShortenedUrls.Queries.GetShortenedUrlB
             var shortenedUrlFullDto = mapper.Map<ShortenedUrlFullDto>(shortenedUrl);
             
             shortenedUrlFullDto.OwnerEmail = shortenedUrl.Owner.Email!;
+            shortenedUrlFullDto.CreatedAt = TimeZoneHelper.ConvertUtcToKyiv(shortenedUrl.CreatedAt);
 
             return shortenedUrlFullDto;
         }

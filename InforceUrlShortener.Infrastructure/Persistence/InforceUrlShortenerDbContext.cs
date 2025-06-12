@@ -8,6 +8,7 @@ namespace InforceUrlShortener.Infrastructure.Persistence
         : IdentityDbContext<User>(options)
     {
         internal DbSet<ShortenedUrl> ShortenedUrls { get; set; }
+        internal DbSet<AlgorithmDescription> AlgorithmDescription { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

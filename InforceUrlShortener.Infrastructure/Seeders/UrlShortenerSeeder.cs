@@ -1,4 +1,5 @@
 ﻿using InforceUrlShortener.Domain.Constants;
+using InforceUrlShortener.Domain.Entities;
 using InforceUrlShortener.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,16 @@ namespace InforceUrlShortener.Infrastructure.Seeders
                 if (!dbContext.Roles.Any())
                 {
                     dbContext.Roles.AddRange(GetRoles());
+                    await dbContext.SaveChangesAsync();
+                }
+                if (!dbContext.AlgorithmDescription.Any())
+                {
+                    dbContext.AlgorithmDescription.Add(new AlgorithmDescription
+                    {
+                        Id = AlgorithmDescription.SingletonId,
+                        Description = "init desc of algorithm",
+                        LastUpdated = DateTime.Now,
+                    });
                     await dbContext.SaveChangesAsync();
                 }
             }

@@ -37,6 +37,7 @@ namespace InforceUrlShortener.Infrastructure.Extensions
             services.AddScoped<IUrlShortenerService, UrlShortenerService>();
             services.AddScoped<IUrlShortenerSeeder, UrlShortenerSeeder>();
             services.AddScoped<IShortenedUrlsAuthorizationService, ShortenedUrlsAuthorizationService>();
+            services.AddScoped<IAlgorithmDescriptionRepository, AlgorithmDescriptionRepository>();
         }
     }
 }

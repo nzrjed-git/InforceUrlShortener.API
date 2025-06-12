@@ -4,7 +4,7 @@ namespace InforceUrlShortener.Domain.RepositoriesInterfaces
 {
     public interface IShortenedUrlRepository
     {
-        Task<Guid> CreateAsync(ShortenedUrl shortenedUrl);
+        Task CreateAsync(ShortenedUrl shortenedUrl);
         Task<bool> HasOriginalUrlDuplicateAsync(string originalUrl);
         Task<bool> HasShortCodeDuplicateAsync(string shortCode);
         Task<ShortenedUrl?> GetShortenedUrlById(Guid id);

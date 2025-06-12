@@ -1,4 +1,6 @@
-﻿using InforceUrlShortener.Application.User;
+﻿using AutoMapper;
+using InforceUrlShortener.Application.ShortenedUrls.DTOs;
+using InforceUrlShortener.Application.User;
 using InforceUrlShortener.Domain.Entities;
 using InforceUrlShortener.Domain.Exceptions;
 using InforceUrlShortener.Domain.RepositoriesInterfaces;
@@ -10,10 +12,11 @@ namespace InforceUrlShortener.Application.ShortenedUrls.Commands.CreateShortened
     public class CreateShortenedUrlCommandHandler(
         IShortenedUrlRepository shortenedUrlRepository,
         IUrlShortenerService urlShortenerService,
-        IUserContext userContext) 
-        : IRequestHandler<CreateShortenedUrlCommand, Guid>
+        IUserContext userContext,
+        IMapper mapper) 
+        : IRequestHandler<CreateShortenedUrlCommand, ShortenedUrlListItemDto>
     {
-        public async Task<Guid> Handle(CreateShortenedUrlCommand request, CancellationToken cancellationToken)
+        public async Task<ShortenedUrlListItemDto> Handle(CreateShortenedUrlCommand request, CancellationToken cancellationToken)
         {
             var currentUser = userContext.GetCurrentUser()!;
 
@@ -30,8 +33,10 @@ namespace InforceUrlShortener.Application.ShortenedUrls.Commands.CreateShortened
                 OwnerId = currentUser.Id
             };
 
-            var id = await shortenedUrlRepository.CreateAsync(shortenedUrl);
-            return id;
+            await shortenedUrlRepository.CreateAsync(shortenedUrl);
+
+            var shortenedUrlListItemDto = mapper.Map<ShortenedUrlListItemDto>(shortenedUrl);
+            return shortenedUrlListItemDto;
         }
     }
 }
