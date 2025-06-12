@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InforceUrlShortener.API", "InforceUrlShortener.API\InforceUrlShortener.API.csproj", "{EE6F9610-B052-4785-B6F8-23E5D65C12C1}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InforceUrlShortener.Infrastructure", "InforceUrlShortener.Infrastructure\InforceUrlShortener.Infrastructure.csproj", "{21EC6673-BB70-4730-AD16-21F07C91E4D2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InforceUrlShortener.Application", "InforceUrlShortener.Application\InforceUrlShortener.Application.csproj", "{1D715A0A-263D-4AC1-BDEE-388BC0E68B48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InforceUrlShortener.Application.Tests", "InforceUrlShortener.Application.Tests\InforceUrlShortener.Application.Tests.csproj", "{4AEFA902-97F5-4DEC-A8FE-08158B4D6C41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InforceUrlShortener.Infrastructure.Tests", "InforceUrlShortener.Infrastructure.Tests\InforceUrlShortener.Infrastructure.Tests.csproj", "{7C0807E8-E331-4A32-A2D7-5D3296D20149}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{1D715A0A-263D-4AC1-BDEE-388BC0E68B48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D715A0A-263D-4AC1-BDEE-388BC0E68B48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D715A0A-263D-4AC1-BDEE-388BC0E68B48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AEFA902-97F5-4DEC-A8FE-08158B4D6C41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AEFA902-97F5-4DEC-A8FE-08158B4D6C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AEFA902-97F5-4DEC-A8FE-08158B4D6C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AEFA902-97F5-4DEC-A8FE-08158B4D6C41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C0807E8-E331-4A32-A2D7-5D3296D20149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C0807E8-E331-4A32-A2D7-5D3296D20149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C0807E8-E331-4A32-A2D7-5D3296D20149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C0807E8-E331-4A32-A2D7-5D3296D20149}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
